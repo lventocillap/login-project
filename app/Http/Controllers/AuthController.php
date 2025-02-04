@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\CredentialInvalid;
-use App\Exceptions\UserNotFound;
+use App\Exceptions\AuthException\CredentialInvalid;
+use App\Exceptions\AuthException\UserNotFound;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -33,9 +33,8 @@ class AuthController extends Controller
     }
     public function logout(Request $request):JsonResponse
     {
-        $cookie = $request->cookie('auth');
-        [$id, $value] = explode('|',$cookie);
-        PersonalAccessToken::find($id)->delete();
+        $token = $request->cookie('auth');
+        PersonalAccessToken::findToken($token)->delete();
         return new JsonResponse(['logout']);
     }
     public function prueba():JsonResponse
