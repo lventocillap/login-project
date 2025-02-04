@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\TokenExpired;
-use App\Exceptions\TokenNotFound;
+use App\Exceptions\AuthException\TokenExpired;
+use App\Exceptions\AuthException\TokenNotFound;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
