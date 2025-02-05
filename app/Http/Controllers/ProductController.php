@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     use ValidateRequestProduct;
+    
     public function getProducts()
     {
         $products = Product::get();
@@ -40,7 +41,7 @@ class ProductController extends Controller
     }
     public function update(int $id, Request $request):JsonResponse
     {
-        $productId = Product::fidn($id);
+        $productId = Product::find($id);
         if(!$productId){
             throw new ProductNotFound;
         }
